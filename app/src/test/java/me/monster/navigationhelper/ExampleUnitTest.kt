@@ -1,4 +1,4 @@
-package me.monster.navigationheler
+package me.monster.navigationhelper
 
 import org.junit.Test
 

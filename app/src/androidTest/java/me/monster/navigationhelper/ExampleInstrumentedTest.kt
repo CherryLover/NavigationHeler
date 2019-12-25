@@ -1,4 +1,4 @@
-package me.monster.navigationheler
+package me.monster.navigationhelper
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
