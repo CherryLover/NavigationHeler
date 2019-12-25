@@ -13,27 +13,27 @@ import androidx.navigation.NavigatorProvider;
  */
 public class NavigationHelper {
 
-    public void navigateUp(View view, int distId) {
+    public static void navigateUp(View view, int distId) {
         KeepStateNavigator navigator = getNavigator(Navigation.findNavController(view));
         navigator.closeMiddle(distId);
     }
 
-    public void navigateUp(Activity activity, int viewId, int distId) {
+    public static void navigateUp(Activity activity, int viewId, int distId) {
         KeepStateNavigator navigator = getNavigator(Navigation.findNavController(activity, viewId));
         navigator.closeMiddle(distId);
     }
 
-    public void navigateUp(View view) {
+    public static void navigateUp(View view) {
         Navigation.findNavController(view)
                 .navigateUp();
     }
 
-    public void navigateUp(Activity activity, int viewId) {
+    public static void navigateUp(Activity activity, int viewId) {
         Navigation.findNavController(activity, viewId)
                 .navigateUp();
     }
 
-    private KeepStateNavigator getNavigator(NavController navController) {
+    private static KeepStateNavigator getNavigator(NavController navController) {
         NavigatorProvider navigatorProvider = navController.getNavigatorProvider();
         return navigatorProvider.getNavigator(KeepStateNavigator.NODE_NAME);
     }
