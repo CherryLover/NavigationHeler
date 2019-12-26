@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/demo_navigation"
     app:startDestination="@id/rootFragment">
 
-    <fragment
+    <keep_state_fragment
         android:id="@+id/rootFragment"
         android:name="me.monster.navigationhelper.fragment.RootFragment"
         android:label="RootFragment" >
         <action
             android:id="@+id/action_rootFragment_to_middleFragment"
             app:destination="@id/middleFragment" />
-    </fragment>
-    <fragment
+    </keep_state_fragment>
+    <keep_state_fragment
         android:id="@+id/middleFragment"
         android:name="me.monster.navigationhelper.fragment.MiddleFragment"
         android:label="MiddleFragment" >
         <action
             android:id="@+id/action_middleFragment_to_thirdFragment"
             app:destination="@id/thirdFragment" />
-    </fragment>
-    <fragment
+    </keep_state_fragment>
+    <keep_state_fragment
         android:id="@+id/thirdFragment"
         android:name="me.monster.navigationhelper.fragment.ThirdFragment"
         android:label="ThirdFragment" />
