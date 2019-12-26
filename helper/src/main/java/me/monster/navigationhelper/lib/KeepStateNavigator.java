@@ -52,6 +52,18 @@ public class KeepStateNavigator extends FragmentNavigator {
         if (fragment == null) {
             String className = destination.getClassName();
             fragment = manager.getFragmentFactory().instantiate(context.getClassLoader(), className);
+            fragment.setArguments(args);
+            int enterAnim = navOptions != null ? navOptions.getEnterAnim() : -1;
+            int exitAnim = navOptions != null ? navOptions.getExitAnim() : -1;
+            int popEnterAnim = navOptions != null ? navOptions.getPopEnterAnim() : -1;
+            int popExitAnim = navOptions != null ? navOptions.getPopExitAnim() : -1;
+            if (enterAnim != -1 || exitAnim != -1 || popEnterAnim != -1 || popExitAnim != -1) {
+                enterAnim = enterAnim != -1 ? enterAnim : 0;
+                exitAnim = exitAnim != -1 ? exitAnim : 0;
+                popEnterAnim = popEnterAnim != -1 ? popEnterAnim : 0;
+                popExitAnim = popExitAnim != -1 ? popExitAnim : 0;
+                transaction.setCustomAnimations(enterAnim, exitAnim, popEnterAnim, popExitAnim);
+            }
             transaction.add(containerId, fragment, tag);
             initialNavigate = true;
             mBackStack.add(tag);
