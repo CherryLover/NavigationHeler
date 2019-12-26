@@ -10,14 +10,19 @@
         android:gravity="center"
         android:text="This is third Fragment" />
 
-    <!--    <Button-->
-    <!--        android:id="@+id/btn_third_next"-->
-    <!--        style="@style/baseBtn"-->
-    <!--        android:text="Entrance third fragment" />-->
-
     <Button
         android:id="@+id/btn_third_exit"
         style="@style/baseBtn"
         android:text="Exit to middle fragment" />
+
+    <Button
+        android:id="@+id/btn_third_navigate_up_to_root"
+        style="@style/baseBtn"
+        android:text="Navigate Up to Root" />
+
+    <Button
+        android:id="@+id/btn_third_back_to_root"
+        style="@style/baseBtn"
+        android:text="Close middle" />
 
 </LinearLayout>
