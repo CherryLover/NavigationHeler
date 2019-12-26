@@ -15,10 +15,20 @@ public class NavigationHelper {
 
     public static void navigateUp(View view, int distId) {
         KeepStateNavigator navigator = getNavigator(Navigation.findNavController(view));
-        navigator.closeMiddle(distId);
+        navigator.navigateUp(distId);
     }
 
     public static void navigateUp(Activity activity, int viewId, int distId) {
+        KeepStateNavigator navigator = getNavigator(Navigation.findNavController(activity, viewId));
+        navigator.navigateUp(distId);
+    }
+
+    public static void close(View view, int distId) {
+        KeepStateNavigator navigator = getNavigator(Navigation.findNavController(view));
+        navigator.closeMiddle(distId);
+    }
+
+    public static void close(Activity activity, int viewId, int distId) {
         KeepStateNavigator navigator = getNavigator(Navigation.findNavController(activity, viewId));
         navigator.closeMiddle(distId);
     }

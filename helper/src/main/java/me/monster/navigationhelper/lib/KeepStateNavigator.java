@@ -81,25 +81,58 @@ public class KeepStateNavigator extends FragmentNavigator {
     }
 
     /**
-     * 使用场景：A 打开 B, B 打开 C，C 直接或是间接（通过 事件总线传递事件 然后由具体的业务进行操作）对 B 进行关闭。然后从 C 直接返回至 A。
+     * 使用场景：A 打开 B, B 打开 C。然后需要关闭 B
      *
      * @param destId 是在 Navigation 节点中 keep_state_fragment 中的 id 值，不能是 action 的 id！！！
      * @return true 移除成功，false 移除失败
      */
-    public boolean closeMiddle(int destId) {
+    boolean closeMiddle(int destId) {
         String removeTag = String.valueOf(destId);
-        StringBuilder sb = new StringBuilder("All stack is : [ ");
-        for (String s : mBackStack) {
-            sb.append(s).append(" ");
+        if (!mBackStack.contains(removeTag)) {
+            return false;
         }
-        sb.append("]").append(". Waiting for close is ").append(removeTag);
-        Log.i(TAG, sb.toString());
         boolean remove = mBackStack.remove(removeTag);
         if (remove) {
             return doNavigate(removeTag);
         } else {
             return false;
         }
+    }
+
+    /**
+     * 使用场景：A 打开 B，B 打开 C。在返回过程中，需要跳过 B 直接回到 A。
+     *
+     * @param destId 是在 Navigation 节点中 keep_state_fragment 中的 id 值，不能是 action 的 id！！！
+     * @return true 移除成功，false 移除失败
+     */
+    boolean navigateUp(int destId) {
+        String distTag = String.valueOf(destId);
+        if (!mBackStack.contains(distTag)) {
+            return false;
+        }
+        FragmentTransaction transaction = manager.beginTransaction();
+        while (!mBackStack.isEmpty()) {
+            String tmp = mBackStack.getLast();
+            Fragment fragmentByTag = manager.findFragmentByTag(tmp);
+            if (tmp.equals(distTag)) {
+                if (fragmentByTag != null) {
+                    transaction.show(fragmentByTag);
+                    transaction.setPrimaryNavigationFragment(fragmentByTag);
+                    transaction.setReorderingAllowed(true);
+                }
+                break;
+            }
+            if (fragmentByTag != null) {
+                mBackStack.removeLast();
+                transaction.remove(fragmentByTag);
+            }
+        }
+        if (manager.isStateSaved()) {
+            transaction.commitNowAllowingStateLoss();
+        } else {
+            transaction.commitNow();
+        }
+        return true;
     }
 
     /**
