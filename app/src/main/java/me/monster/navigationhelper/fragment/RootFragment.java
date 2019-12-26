@@ -21,7 +21,8 @@ public class RootFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.middleFragment);
+                RootFragmentDirections.ActionRootFragmentToMiddleFragment action = RootFragmentDirections.actionRootFragmentToMiddleFragment().setUserName("testName");
+                navController.navigate(action);
             }
         });
         rootView.findViewById(R.id.btn_root_exit)

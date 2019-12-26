@@ -9,7 +9,11 @@
         android:label="RootFragment" >
         <action
             android:id="@+id/action_rootFragment_to_middleFragment"
-            app:destination="@id/middleFragment" />
+            app:destination="@id/middleFragment"
+            app:enterAnim="@anim/side_left_in"
+            app:exitAnim="@anim/side_left_out"
+            app:popEnterAnim="@anim/side_right_in"
+            app:popExitAnim="@anim/side_right_out" />
     </keep_state_fragment>
     <keep_state_fragment
         android:id="@+id/middleFragment"
@@ -18,6 +22,11 @@
         <action
             android:id="@+id/action_middleFragment_to_thirdFragment"
             app:destination="@id/thirdFragment" />
+        <argument
+            android:name="userName"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="Middle" />
     </keep_state_fragment>
     <keep_state_fragment
         android:id="@+id/thirdFragment"
